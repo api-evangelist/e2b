@@ -1,0 +1,146 @@
+aid: e2b
+name: E2B
+description: >-
+  E2B provides secure, isolated sandbox runtimes for AI-generated and
+  agent-driven code, built on Firecracker microVMs that cold-start in under
+  200ms. The platform's Code Interpreter, AI Sandboxes, and Desktop Sandbox
+  products let LLMs execute Python, JavaScript, Ruby, C++ and other languages
+  with full filesystem, terminal, package management, and browser access for
+  sessions up to 24 hours. Customers include AI labs, agent startups, data
+  teams, and enterprises building code interpreters, deep-research agents,
+  data analysis features, and computer-use agents. SDKs are available for
+  Python and TypeScript and integrate with OpenAI, Anthropic, Mistral, Llama,
+  LangChain, LlamaIndex, and the Vercel AI SDK. Pricing is freemium with Pro
+  and Enterprise tiers and a startups program.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Code Interpreter
+  - Sandboxes
+  - Secure Execution
+  - AI Agents
+  - Firecracker
+  - microVMs
+  - Code Execution
+  - Data Analysis
+  - Desktop Sandbox
+  - Computer Use
+  - Custom Templates
+  - Python
+  - TypeScript
+url: https://raw.githubusercontent.com/api-evangelist/e2b/refs/heads/main/apis.yml
+created: '2026-05-23'
+modified: '2026-05-23'
+specificationVersion: '0.20'
+apis:
+  - aid: e2b:sandbox-api
+    name: E2B Sandbox API
+    description: >-
+      The E2B Sandbox API creates and controls per-agent Linux microVMs that
+      can run arbitrary code, install packages, read and write files, stream
+      terminal output, and host headless browsers. Code Interpreter is a
+      higher-level surface tuned for LLM-driven Python and JavaScript
+      execution with rich outputs.
+    humanURL: https://e2b.dev/docs
+    baseURL: https://api.e2b.dev
+    tags:
+      - Sandboxes
+      - Code Interpreter
+      - Templates
+      - Filesystem
+      - Process
+      - Terminal
+      - Desktop
+    properties:
+      - type: Documentation
+        url: https://e2b.dev/docs
+      - type: APIReference
+        url: https://e2b.dev/docs/sdk-reference
+      - type: GettingStarted
+        url: https://e2b.dev/docs/quickstart
+      - type: SignUp
+        url: https://e2b.dev/auth/sign-up
+      - type: SDK
+        url: https://github.com/e2b-dev/e2b
+      - type: SDK
+        url: https://github.com/e2b-dev/code-interpreter
+      - type: SDK
+        url: https://github.com/e2b-dev/desktop
+      - type: GitHubOrganization
+        url: https://github.com/e2b-dev
+      - type: GitHubRepository
+        url: https://github.com/e2b-dev/e2b-cookbook
+      - type: Pricing
+        url: https://e2b.dev/pricing
+      - type: Blog
+        url: https://e2b.dev/blog
+    features:
+      - name: Fast Sandbox Boot
+        description: Firecracker microVMs that start in under 200ms with no cold starts.
+      - name: Multi-Language Execution
+        description: Run Python, JavaScript, Ruby, C++, and more inside the sandbox.
+      - name: Code Interpreter
+        description: Higher-level SDK that returns charts, tables, and stdout/stderr for LLM-driven analysis.
+      - name: Filesystem and Process
+        description: Full file I/O, package installation, and process control with streaming output.
+      - name: Custom Templates
+        description: Build reusable sandbox images with your own dependencies and tools.
+      - name: Long-Running Sessions
+        description: Sessions up to 24 hours on Pro for deep research and long agent runs.
+      - name: Desktop Sandbox
+        description: Virtual desktop environments for LLM computer-use agents.
+      - name: Browser Inside Sandbox
+        description: Headless browser access for agents that need both code and web.
+      - name: Cookbook and Templates
+        description: 20+ integration patterns published in the e2b-cookbook repo.
+    useCases:
+      - name: LLM Code Interpreter
+        description: Power Python/JS code execution behind chat assistants and copilots.
+      - name: Deep Research Agents
+        description: Give agents a persistent, secure workspace for multi-step research jobs.
+      - name: Data Analysis and Visualization
+        description: Let agents load datasets, run analysis, and return charts safely.
+      - name: Computer Use Agents
+        description: Pair with vision models to operate a full desktop environment.
+      - name: CI/CD and GitHub Actions
+        description: Run untrusted or AI-generated code inside isolated VMs.
+    integrations:
+      - name: OpenAI
+      - name: Anthropic
+      - name: Mistral
+      - name: Llama
+      - name: LangChain
+      - name: LlamaIndex
+      - name: Vercel AI SDK
+      - name: CrewAI
+      - name: AutoGen
+      - name: Hugging Face
+    authentication:
+      - type: API Key
+        description: API key passed via the `E2B_API_KEY` environment variable or `Authorization` header authenticates SDK and REST calls.
+common:
+  - type: Website
+    url: https://e2b.dev
+  - type: Documentation
+    url: https://e2b.dev/docs
+  - type: Blog
+    url: https://e2b.dev/blog
+  - type: GitHubOrganization
+    url: https://github.com/e2b-dev
+  - type: Pricing
+    url: https://e2b.dev/pricing
+  - type: SignUp
+    url: https://e2b.dev/auth/sign-up
+  - type: Discord
+    url: https://discord.gg/U7KEcGErtQ
+  - type: Twitter
+    url: https://x.com/e2b_dev
+  - type: TermsOfService
+    url: https://e2b.dev/terms
+  - type: PrivacyPolicy
+    url: https://e2b.dev/privacy
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
