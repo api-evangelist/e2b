@@ -1,0 +1,404 @@
+openapi: 3.1.0
+info:
+  title: E2B Sandbox API
+  description: |
+    REST API for creating and controlling per-agent Linux microVM sandboxes,
+    managing custom templates, performing filesystem operations, and starting
+    and signalling processes. Authentication is via an API key passed in the
+    X-API-Key header. This specification is a best-effort, documentation-derived
+    description and may omit fields.
+  version: 1.0.0
+  contact:
+    name: E2B
+    url: https://e2b.dev/docs
+servers:
+  - url: https://api.e2b.dev
+    description: Production
+security:
+  - E2BApiKey: []
+paths:
+  /sandboxes:
+    get:
+      summary: List sandboxes
+      operationId: listSandboxes
+      parameters:
+        - in: query
+          name: metadata
+          schema:
+            type: string
+          description: URL-encoded key=value pairs to filter sandboxes by metadata.
+      responses:
+        '200':
+          description: List of sandboxes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sandbox'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+    post:
+      summary: Create a sandbox
+      operationId: createSandbox
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                templateID:
+                  type: string
+                metadata:
+                  type: object
+                  additionalProperties:
+                    type: string
+                timeout:
+                  type: integer
+                  description: Seconds until the sandbox auto-terminates.
+      responses:
+        '201':
+          description: Sandbox created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+  /sandboxes/{sandboxID}:
+    parameters:
+      - $ref: '#/components/parameters/SandboxID'
+    get:
+      summary: Get sandbox
+      operationId: getSandbox
+      responses:
+        '200':
+          description: Sandbox detail
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sandbox'
+    delete:
+      summary: Terminate a sandbox
+      operationId: deleteSandbox
+      responses:
+        '204':
+          description: Terminated
+  /sandboxes/{sandboxID}/pause:
+    post:
+      summary: Pause a sandbox
+      operationId: pauseSandbox
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+      responses:
+        '200':
+          description: Sandbox paused
+  /sandboxes/{sandboxID}/resume:
+    post:
+      summary: Resume a paused sandbox
+      operationId: resumeSandbox
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+      responses:
+        '200':
+          description: Sandbox resumed
+  /sandboxes/{sandboxID}/timeout:
+    post:
+      summary: Set sandbox timeout
+      operationId: setSandboxTimeout
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                timeout:
+                  type: integer
+                  description: New idle timeout in seconds.
+      responses:
+        '200':
+          description: Timeout updated
+  /sandboxes/{sandboxID}/logs:
+    get:
+      summary: Get sandbox logs
+      operationId: getSandboxLogs
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+      responses:
+        '200':
+          description: Logs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  logs:
+                    type: array
+                    items:
+                      type: object
+                      additionalProperties: true
+  /sandboxes/{sandboxID}/metrics:
+    get:
+      summary: Get sandbox metrics
+      operationId: getSandboxMetrics
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+      responses:
+        '200':
+          description: Metrics
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /sandboxes/{sandboxID}/files/upload:
+    post:
+      summary: Upload a file into the sandbox
+      operationId: uploadFile
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+        - in: query
+          name: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+      responses:
+        '200':
+          description: File uploaded
+  /sandboxes/{sandboxID}/files/download:
+    get:
+      summary: Download a file from the sandbox
+      operationId: downloadFile
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+        - in: query
+          name: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: File contents
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+  /sandboxes/{sandboxID}/files/list:
+    get:
+      summary: List files in a sandbox directory
+      operationId: listFiles
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+        - in: query
+          name: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Directory listing
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/FileEntry'
+  /sandboxes/{sandboxID}/processes:
+    parameters:
+      - $ref: '#/components/parameters/SandboxID'
+    post:
+      summary: Start a process inside the sandbox
+      operationId: startProcess
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                command:
+                  type: string
+                cwd:
+                  type: string
+                envs:
+                  type: object
+                  additionalProperties:
+                    type: string
+      responses:
+        '200':
+          description: Process started
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Process'
+    get:
+      summary: List processes in the sandbox
+      operationId: listProcesses
+      responses:
+        '200':
+          description: Processes
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Process'
+  /sandboxes/{sandboxID}/processes/{processID}/signal:
+    post:
+      summary: Send a signal to a sandbox process
+      operationId: signalProcess
+      parameters:
+        - $ref: '#/components/parameters/SandboxID'
+        - in: path
+          name: processID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                signal:
+                  type: string
+                  example: SIGTERM
+      responses:
+        '200':
+          description: Signal delivered
+  /templates:
+    get:
+      summary: List sandbox templates
+      operationId: listTemplates
+      responses:
+        '200':
+          description: Templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+    post:
+      summary: Create a sandbox template
+      operationId: createTemplate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Template created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+components:
+  securitySchemes:
+    E2BApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  parameters:
+    SandboxID:
+      in: path
+      name: sandboxID
+      required: true
+      schema:
+        type: string
+  responses:
+    Unauthorized:
+      description: Missing or invalid API key
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Sandbox:
+      type: object
+      properties:
+        sandboxID:
+          type: string
+        templateID:
+          type: string
+        clientID:
+          type: string
+          deprecated: true
+        startedAt:
+          type: string
+          format: date-time
+        endAt:
+          type: string
+          format: date-time
+        cpuCount:
+          type: integer
+        memoryMB:
+          type: integer
+        diskSizeMB:
+          type: integer
+        state:
+          type: string
+          enum: [running, paused]
+        envdVersion:
+          type: string
+        alias:
+          type: string
+        metadata:
+          type: object
+          additionalProperties:
+            type: string
+    Template:
+      type: object
+      properties:
+        templateID:
+          type: string
+        name:
+          type: string
+        cpuCount:
+          type: integer
+        memoryMB:
+          type: integer
+    FileEntry:
+      type: object
+      properties:
+        name:
+          type: string
+        path:
+          type: string
+        type:
+          type: string
+          enum: [file, dir]
+        size:
+          type: integer
+    Process:
+      type: object
+      properties:
+        processID:
+          type: string
+        command:
+          type: string
+        state:
+          type: string
+    Error:
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
