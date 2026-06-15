@@ -1,0 +1,344 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "E2B Sandbox API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "X-API-Key",
+      "value": "{{X-API-Key}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List sandboxes",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes",
+        "params": [
+          {
+            "name": "metadata",
+            "value": "",
+            "type": "query",
+            "description": "URL-encoded key=value pairs to filter sandboxes by metadata."
+          }
+        ]
+      },
+      "docs": "List sandboxes"
+    },
+    {
+      "info": {
+        "name": "Create a sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a sandbox"
+    },
+    {
+      "info": {
+        "name": "Get sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get sandbox"
+    },
+    {
+      "info": {
+        "name": "Terminate a sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Terminate a sandbox"
+    },
+    {
+      "info": {
+        "name": "Pause a sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/pause",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Pause a sandbox"
+    },
+    {
+      "info": {
+        "name": "Resume a paused sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/resume",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Resume a paused sandbox"
+    },
+    {
+      "info": {
+        "name": "Set sandbox timeout",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/timeout",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Set sandbox timeout"
+    },
+    {
+      "info": {
+        "name": "Get sandbox logs",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/logs",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get sandbox logs"
+    },
+    {
+      "info": {
+        "name": "Get sandbox metrics",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/metrics",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Get sandbox metrics"
+    },
+    {
+      "info": {
+        "name": "Upload a file into the sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/files/upload",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "path",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Upload a file into the sandbox"
+    },
+    {
+      "info": {
+        "name": "Download a file from the sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/files/download",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "path",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "Download a file from the sandbox"
+    },
+    {
+      "info": {
+        "name": "List files in a sandbox directory",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/files/list",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "path",
+            "value": "",
+            "type": "query"
+          }
+        ]
+      },
+      "docs": "List files in a sandbox directory"
+    },
+    {
+      "info": {
+        "name": "List processes in the sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/processes",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "List processes in the sandbox"
+    },
+    {
+      "info": {
+        "name": "Start a process inside the sandbox",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/processes",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Start a process inside the sandbox"
+    },
+    {
+      "info": {
+        "name": "Send a signal to a sandbox process",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/sandboxes/:sandboxID/processes/:processID/signal",
+        "params": [
+          {
+            "name": "sandboxID",
+            "value": "",
+            "type": "path"
+          },
+          {
+            "name": "processID",
+            "value": "",
+            "type": "path"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Send a signal to a sandbox process"
+    },
+    {
+      "info": {
+        "name": "List sandbox templates",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.e2b.dev/templates"
+      },
+      "docs": "List sandbox templates"
+    },
+    {
+      "info": {
+        "name": "Create a sandbox template",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.e2b.dev/templates",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create a sandbox template"
+    }
+  ],
+  "bundled": true
+}
