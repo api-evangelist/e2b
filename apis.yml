@@ -60,13 +60,13 @@ apis:
         url: https://e2b.dev/docs/sdk-reference
       - type: GettingStarted
         url: https://e2b.dev/docs/quickstart
-      - type: SignUp
+      - type: Signup
         url: https://e2b.dev/auth/sign-up
-      - type: SDK
+      - type: SDKs
         url: https://github.com/e2b-dev/e2b
-      - type: SDK
+      - type: SDKs
         url: https://github.com/e2b-dev/code-interpreter
-      - type: SDK
+      - type: SDKs
         url: https://github.com/e2b-dev/desktop
       - type: GitHubOrganization
         url: https://github.com/e2b-dev
@@ -131,7 +131,7 @@ common:
     url: https://github.com/e2b-dev
   - type: Pricing
     url: https://e2b.dev/pricing
-  - type: SignUp
+  - type: Signup
     url: https://e2b.dev/auth/sign-up
   - type: Discord
     url: https://discord.gg/U7KEcGErtQ
