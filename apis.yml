@@ -121,6 +121,8 @@ apis:
       - type: API Key
         description: API key passed via the `E2B_API_KEY` environment variable or `Authorization` header authenticates SDK and REST calls.
 common:
+  - type: AgenticAccess
+    url: agentic-access/e2b-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/e2b-vulnerability-disclosure.yml
   - type: DomainSecurity
