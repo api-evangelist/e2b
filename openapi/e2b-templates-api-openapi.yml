@@ -1,0 +1,78 @@
+openapi: 3.1.0
+info:
+  title: E2B Sandbox Sandboxes Templates API
+  description: 'REST API for creating and controlling per-agent Linux microVM sandboxes,
+
+    managing custom templates, performing filesystem operations, and starting
+
+    and signalling processes. Authentication is via an API key passed in the
+
+    X-API-Key header. This specification is a best-effort, documentation-derived
+
+    description and may omit fields.
+
+    '
+  version: 1.0.0
+  contact:
+    name: E2B
+    url: https://e2b.dev/docs
+servers:
+- url: https://api.e2b.dev
+  description: Production
+security:
+- E2BApiKey: []
+tags:
+- name: Templates
+paths:
+  /templates:
+    get:
+      summary: List sandbox templates
+      operationId: listTemplates
+      responses:
+        '200':
+          description: Templates
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Template'
+      tags:
+      - Templates
+    post:
+      summary: Create a sandbox template
+      operationId: createTemplate
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: true
+      responses:
+        '201':
+          description: Template created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Template'
+      tags:
+      - Templates
+components:
+  schemas:
+    Template:
+      type: object
+      properties:
+        templateID:
+          type: string
+        name:
+          type: string
+        cpuCount:
+          type: integer
+        memoryMB:
+          type: integer
+  securitySchemes:
+    E2BApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
