@@ -1,0 +1,16 @@
+{
+  "provider": "e2b",
+  "sources": [
+    "e2b-sandboxes-api-openapi.yml",
+    "e2b-templates-api-openapi.yml"
+  ],
+  "outputs": [
+    "e2b-sandboxes-api-openapi.yml",
+    "e2b-templates-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
