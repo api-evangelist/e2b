@@ -35,6 +35,20 @@ tags:
   - Secure Execution
   - AI Agents
   - Firecracker
+  - MicroVMs
+  - Code Execution
+  - Data Analysis
+  - Desktop Sandbox
+  - Computer Use
+  - Custom Templates
+  - Python
+  - TypeScript
+tags_raw:
+  - Code Interpreter
+  - Sandboxes
+  - Secure Execution
+  - AI Agents
+  - Firecracker
   - microVMs
   - Code Execution
   - Data Analysis
@@ -57,6 +71,14 @@ apis:
   humanURL: https://e2b.dev/docs
   baseURL: https://api.e2b.dev
   tags:
+  - Sandboxes
+  - Code Interpreter
+  - Templates
+  - Filesystem
+  - Processes
+  - Terminal
+  - Desktop
+  tags_raw:
   - Sandboxes
   - Code Interpreter
   - Templates
