@@ -1,8 +1,7 @@
 {
   "provider": "e2b",
   "sources": [
-    "e2b-sandboxes-api-openapi.yml",
-    "e2b-templates-api-openapi.yml"
+    "_original/e2b-openapi.yml"
   ],
   "outputs": [
     "e2b-sandboxes-api-openapi.yml",
@@ -11,6 +10,32 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "e2b-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "e2b-openapi.yml: tagged paths GET /sandboxes -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /sandboxes/{sandboxID} -> Sandboxes",
+    "e2b-openapi.yml: tagged paths DELETE /sandboxes/{sandboxID} -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes/{sandboxID}/pause -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes/{sandboxID}/resume -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes/{sandboxID}/timeout -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /sandboxes/{sandboxID}/logs -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /sandboxes/{sandboxID}/metrics -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes/{sandboxID}/files/upload -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /sandboxes/{sandboxID}/files/download -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /sandboxes/{sandboxID}/files/list -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes/{sandboxID}/processes -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /sandboxes/{sandboxID}/processes -> Sandboxes",
+    "e2b-openapi.yml: tagged paths POST /sandboxes/{sandboxID}/processes/{processID}/signal -> Sandboxes",
+    "e2b-openapi.yml: tagged paths GET /templates -> Templates",
+    "e2b-openapi.yml: tagged paths POST /templates -> Templates",
+    "e2b-openapi.yml: declared missing tag: Sandboxes",
+    "e2b-openapi.yml: declared missing tag: Templates",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "e2b-sandboxes-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "e2b-templates-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
